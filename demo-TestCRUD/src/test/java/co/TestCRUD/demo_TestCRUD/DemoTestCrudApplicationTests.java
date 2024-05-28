@@ -30,26 +30,18 @@ class StudentControllerTest {
 	void setStudentControllerLoads() {
 		assertThat(studentController).isNotNull();
 	}
-	private MvcResult createStudent() throws Exception {
-		Student student = new Student();
-		student.setWorking(true);
-		student.setName("Bart");
-		student.setSurname("Simpson");
-		return createStudent(student);
-	}
-	private MvcResult createStudent(Student student) throws Exception {
-		MvcResult result = createStudent();
+	@Test
+	 void createStudent() throws Exception {
+		Student student = new Student(null,"Bart","Simpson",true);
+
+
+		MvcResult result = createStudentRequest(student);
+
 		Student studentFromResponse = objectMapper.readValue(result.getResponse().getContentAsString(), Student.class);
 		assertThat(studentFromResponse.getId()).isNotNull();
-		return createStudent(student);
-	}
-
-	private MvcResult createStudentRequest() throws Exception {
-		Student student = new Student();
-		student.setWorking(true);
-		student.setName("Bart");
-		student.setSurname("Simpson");
-		return createStudentRequest(student);
+		assertThat(studentFromResponse.getName()).isEqualTo("Bart");
+		assertThat(studentFromResponse.getSurname()).isEqualTo("Simpson");
+		assertThat(studentFromResponse.isWorking()).isTrue();
 	}
 	private MvcResult createStudentRequest(Student student) throws Exception {
 		if(student == null) return null;
@@ -60,5 +52,4 @@ class StudentControllerTest {
 				.andExpect(status().isOk())
 				.andReturn();
 	}
-
 }

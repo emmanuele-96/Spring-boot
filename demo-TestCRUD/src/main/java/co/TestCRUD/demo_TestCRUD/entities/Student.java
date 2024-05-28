@@ -57,13 +57,4 @@ public class Student {
         isWorking = working;
     }
 
-    @Override
-    public String toString() {
-        return "Student{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", surname='" + surname + '\'' +
-                ", isWorking=" + isWorking +
-                '}';
-    }
 }

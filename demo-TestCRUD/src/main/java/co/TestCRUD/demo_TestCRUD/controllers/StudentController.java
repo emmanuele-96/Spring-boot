@@ -11,24 +11,22 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
-@Controller
+@RestController
 @RequestMapping("/student")
 public class StudentController {
-    @Autowired
-    private StudentRepository studentRepository;
     @Autowired
     private StudentService studentService;
     @PostMapping("")
         public @ResponseBody Student create(@RequestBody Student student) {
-        return studentRepository.save(student);
+        return studentService.createStudent(student);
     }
     @GetMapping("/")
     public @ResponseBody List<Student> getList(){
-       return studentRepository.findAll();
+       return studentService.getAllStudent();
     }
     @GetMapping("/{id}")
         public @ResponseBody Student getSingle(@PathVariable long id){
-         Optional<Student> student = studentRepository.findById(id);
+         Optional<Student> student = studentService.getStudentById(id);
          if(student.isPresent()) {
              return student.get();
          } else {
@@ -38,17 +36,17 @@ public class StudentController {
     @PutMapping("/{id}")
     public void update(@PathVariable long id, @RequestBody @NotNull Student student) {
         student.setId(id);
-        studentRepository.save(student);
+        studentService.updateStudent(id, student);
 
     }
-    @PutMapping("/{id}/working")
+    @PatchMapping("/{id}/working")
     public void setStudentWorking(@PathVariable long id, @RequestParam("isWorking") boolean isWorking) {
         studentService.setStudentUpdateIsWorking(id, isWorking);
 
     }
     @DeleteMapping("/{id}")
     public void delete(@PathVariable long id) {
-        studentRepository.deleteById(id);
+        studentService.deleteStudent(id);
 
     }
 
