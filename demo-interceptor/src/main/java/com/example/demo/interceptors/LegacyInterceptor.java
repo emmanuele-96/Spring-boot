@@ -10,6 +10,7 @@ import org.springframework.web.servlet.ModelAndView;
 public class LegacyInterceptor implements HandlerInterceptor {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         if (request.getRequestURL().toString().contains("/legacy")) {
+            response.sendError(HttpServletResponse.SC_GONE, "Gone");
             return false;
         }
         return true;
