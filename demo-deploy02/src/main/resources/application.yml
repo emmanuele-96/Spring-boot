@@ -1,0 +1,15 @@
+server:
+  port: 5000
+---
+server:
+  port: 7070
+spring:
+  profiles: prod
+---
+server:
+  port: 4000
+spring:
+  profiles: test
+
+
+
