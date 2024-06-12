@@ -1,0 +1,13 @@
+spring:
+profiles:
+  active: test
+server:
+  port: 4000
+  welcomeMsg: Hello from Test
+---
+spring:
+profiles:
+  active: prod
+server:
+  port: 5000
+  welcomeMsg: Hello form Prod
