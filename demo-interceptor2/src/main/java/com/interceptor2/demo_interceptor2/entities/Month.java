@@ -3,7 +3,7 @@ package com.interceptor2.demo_interceptor2.entities;
 import jakarta.persistence.*;
 
 @Entity
-@Table
+@Table(name = "mese")
 public class Month {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
