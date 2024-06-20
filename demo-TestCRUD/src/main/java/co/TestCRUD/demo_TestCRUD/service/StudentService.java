@@ -2,7 +2,6 @@ package co.TestCRUD.demo_TestCRUD.service;
 
 import co.TestCRUD.demo_TestCRUD.entities.Student;
 import co.TestCRUD.demo_TestCRUD.repositories.StudentRepository;
-import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
@@ -32,12 +31,15 @@ public class StudentService {
         return studentRepository.save(student);
 
     }
-    public void setStudentUpdateIsWorking(Long studentId, boolean isWorking){
-        Optional<Student> student = studentRepository.findById(studentId);
-        if(!student.isPresent());
-        student.get().setWorking(isWorking);
-        studentRepository.save(student.get());
+    public Student updateStudentWorkingStatus(Long id, boolean isWorking) {
+        return studentRepository.findById(id)
+                .map(student -> {
+                    student.setWorking(isWorking);
+                    return studentRepository.save(student);
+                })
+                .orElseThrow(() -> new RuntimeException("Student not found"));
     }
+
     public boolean deleteStudent(Long id) {
         if(studentRepository.existsById(id)) {
             studentRepository.deleteById(id);

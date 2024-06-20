@@ -34,18 +34,18 @@ public class StudentController {
          }
     }
     @PutMapping("/{id}")
-    public void update(@PathVariable long id, @RequestBody @NotNull Student student) {
+    public void update(@PathVariable Long id, @RequestBody Student student) {
         student.setId(id);
         studentService.updateStudent(id, student);
 
     }
     @PatchMapping("/{id}/working")
     public void setStudentWorking(@PathVariable long id, @RequestParam("isWorking") boolean isWorking) {
-        studentService.setStudentUpdateIsWorking(id, isWorking);
+        studentService.updateStudentWorkingStatus(id, isWorking);
 
     }
     @DeleteMapping("/{id}")
-    public void delete(@PathVariable long id) {
+    public void delete(@PathVariable Long id) {
         studentService.deleteStudent(id);
 
     }

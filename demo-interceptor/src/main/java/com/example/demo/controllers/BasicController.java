@@ -13,4 +13,6 @@ public class BasicController {
     public String dataOggi() {
         return LocalDateTime.now().toString();
     }
+
+
 }

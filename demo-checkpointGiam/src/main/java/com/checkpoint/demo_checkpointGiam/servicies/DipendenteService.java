@@ -17,8 +17,13 @@ public class DipendenteService {
         return dipendenteRepository.save(dipendente);
     }
 
-    public List<Dipendente> getDipendenteByID(Long id) {
-        return dipendenteRepository.findAll();
+
+    public Dipendente getDipendenteByID(Long id) {
+        Optional<Dipendente> dipendenteOptional = dipendenteRepository.findById(id);
+        if(dipendenteOptional.isPresent()) {
+            return dipendenteOptional.get();
+        }
+        return null;
     }
     public List<Dipendente> getAllDipendenti() {
         return dipendenteRepository.findAll();

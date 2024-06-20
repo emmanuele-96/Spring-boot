@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -16,18 +17,12 @@ public class DipendenteController {
     @Autowired
     private DipendenteService dipendenteService;
     @PostMapping("")
-    public ResponseEntity<Dipendente> creaDipendente (@RequestBody Dipendente dipendente) {
-        Dipendente newDipendente = dipendenteService.creaDipendente(dipendente);
-        return ResponseEntity.ok(newDipendente);
+    public Dipendente creaDipendente (@RequestBody Dipendente dipendente) {
+       return dipendenteService.creaDipendente(dipendente);
     }
     @GetMapping("/{id}")
-    public Optional<List<Dipendente>> getDipendenteByID(Long id) {
-        List<Dipendente> dipendente = dipendenteService.getDipendenteByID(id);
-        if (dipendente != null) {
-            return Optional.of(dipendente);
-        } else {
-            return Optional.empty();
-        }
+    public Dipendente getDipendenteByID(@PathVariable Long id) {
+            return dipendenteService.getDipendenteByID(id);
     }
     @GetMapping("/")
     public ResponseEntity<List<Dipendente>> getAllDipendenti() {
@@ -40,7 +35,7 @@ public class DipendenteController {
     }
     @PutMapping("/{id}")
     public ResponseEntity<Optional<Dipendente>> updateDipendente(@PathVariable Long id, @RequestBody Dipendente dettagliDipendente) {
-        Optional<List<Dipendente>> existingDipendente = Optional.ofNullable(dipendenteService.getDipendenteByID(id));
+        Optional<List<Dipendente>> existingDipendente = Optional.ofNullable(Collections.singletonList(dipendenteService.getDipendenteByID(id)));
 
         if (existingDipendente.isPresent()) {
             Optional<Dipendente> updatedDipendente = dipendenteService.updateDipendente(id, dettagliDipendente);  

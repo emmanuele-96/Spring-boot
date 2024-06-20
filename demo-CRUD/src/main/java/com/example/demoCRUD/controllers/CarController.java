@@ -26,7 +26,7 @@ public class CarController {
       Car carSaved = carRepository.saveAndFlush(car);
       return carSaved;
     }
-    //per osservare l'intero elenco di Car
+    //per osservare l'intero elenco di Car - Operazione CRUD - R READ
     @GetMapping
     public List<Car> get() {
         List<Car> cars = carRepository.findAll();
@@ -44,7 +44,7 @@ public class CarController {
             return car;
         }
     }
-    //metodo mer modificare un oggetto car in base all'id
+    //metodo mer modificare un oggetto car in base all'id - Operazione CRUD - U UPDATE
     @PutMapping("/{id}")
     public ResponseEntity<Car> updateCar(@PathVariable long id, @RequestBody Car car) {
         if (carRepository.existsById(id)) {

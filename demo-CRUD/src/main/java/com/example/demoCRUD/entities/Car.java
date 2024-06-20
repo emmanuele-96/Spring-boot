@@ -1,13 +1,6 @@
 package com.example.demoCRUD.entities;
 
-
-
-
 import jakarta.persistence.*;
-
-
-
-
 @Entity
 @Table
 //@Data // imposta automaticamente i getters e i setters
